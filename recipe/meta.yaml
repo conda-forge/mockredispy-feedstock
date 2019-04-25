@@ -1,32 +1,27 @@
-{% set name = "mockredispy" %}
 {% set version = "2.9.3" %}
-{% set build = 1 %}
-{% set hash = "3bacb3f03f91d62b3b0214479716108211e164357dba32959abbfaf4a28e06f0" %}
 
 package:
-  name: {{ name }}
+  name: mockredispy
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version}}.tar.gz
+  fn: mockredispy-{{ version}}.tar.gz
   url: https://github.com/locationlabs/mockredis/archive/{{ version }}.tar.gz
-  sha256: {{ hash }}
+  sha256: 3bacb3f03f91d62b3b0214479716108211e164357dba32959abbfaf4a28e06f0
 
 build:
   noarch: python
-  number: {{ build }}
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 2
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
-  host:
-    - pip
+  build:
     - python
-    - setuptools
+    - pip
     - nose
 
   run:
     - python
-    - setuptools
 
 test:
   imports:
